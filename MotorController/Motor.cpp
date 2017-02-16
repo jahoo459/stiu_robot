@@ -7,12 +7,21 @@
 
 #include "Motor.h"
 
-Motor::Motor() {
-	// TODO Auto-generated constructor stub
+Motor::Motor(string pinNo) {
 
+	if(pinNo.at(0) == 'P' && (pinNo.at(1) == '8' || pinNo.at(1) == '9')
+		&& pinNo.at(2) == '_') //check if format is ok
+	{
+		this->m_pinNo = pinNo;
+	}
+	else
+	{
+		cout << "Pin Number is incorrect, could not create Motor object" << endl;
+	}
 }
 
 Motor::~Motor() {
 	// TODO Auto-generated destructor stub
 }
+
 
