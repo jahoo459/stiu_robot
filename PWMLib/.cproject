@@ -100,7 +100,7 @@
 									<listOptionValue builtIn="false" value="/usr/lib/gcc-cross/arm-linux-gnueabihf/4.7/include"/>
 									<listOptionValue builtIn="false" value="/usr/lib/gcc-cross/arm-linux-gnueabihf/4.7/include-fixed/linux"/>
 								</option>
-								<option id="gnu.c.compiler.option.misc.pic.685324231" superClass="gnu.c.compiler.option.misc.pic" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="gnu.c.compiler.option.misc.pic.685324231" name="Position Independent Code (-fPIC)" superClass="gnu.c.compiler.option.misc.pic" useByScannerDiscovery="false" value="true" valueType="boolean"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.932127154" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.cross.cpp.compiler.1451953121" name="Cross G++ Compiler" superClass="cdt.managedbuild.tool.gnu.cross.cpp.compiler">
@@ -111,7 +111,7 @@
 									<listOptionValue builtIn="false" value="/usr/arm-linux-gnueabihf/include/c++/4.7.4/arm-linux-gnueabihf/hf"/>
 									<listOptionValue builtIn="false" value="/usr/arm-linux-gnueabihf/include/c++/4.7.4/backward"/>
 								</option>
-								<option id="gnu.cpp.compiler.option.other.pic.2017802251" superClass="gnu.cpp.compiler.option.other.pic" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="gnu.cpp.compiler.option.other.pic.2017802251" name="Position Independent Code (-fPIC)" superClass="gnu.cpp.compiler.option.other.pic" useByScannerDiscovery="false" value="true" valueType="boolean"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.107217814" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.cross.c.linker.1090036004" name="Cross GCC Linker" superClass="cdt.managedbuild.tool.gnu.cross.c.linker">
@@ -122,7 +122,8 @@
 								<option id="gnu.cpp.link.option.paths.2126028165" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
 									<listOptionValue builtIn="false" value="/usr/arm-linux-gnueabihf/lib"/>
 								</option>
-								<option id="gnu.cpp.link.option.flags.1817603086" superClass="gnu.cpp.link.option.flags" useByScannerDiscovery="false" value="-pthread" valueType="string"/>
+								<option id="gnu.cpp.link.option.flags.1817603086" name="Linker flags" superClass="gnu.cpp.link.option.flags" useByScannerDiscovery="false" value="-pthread" valueType="string"/>
+								<option id="gnu.cpp.link.option.libs.395834474" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1640268914" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -130,6 +131,7 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.cross.archiver.1633682631" name="Cross GCC Archiver" superClass="cdt.managedbuild.tool.gnu.cross.archiver"/>
 							<tool id="cdt.managedbuild.tool.gnu.cross.assembler.394229562" name="Cross GCC Assembler" superClass="cdt.managedbuild.tool.gnu.cross.assembler">
+								<option id="gnu.both.asm.option.include.paths.1130178034" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths"/>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.899948343" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
 						</toolChain>
