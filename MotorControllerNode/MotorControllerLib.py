@@ -2,7 +2,7 @@ import ioLib as io
 
 class Motor:
     def __init__(self, pwmChannel, IN1, IN2, PWM_period):
-        print("Creating motor object...")
+        print("Creating motor object..." + pwmChannel)
         self.pwmChannelName = pwmChannel
         self.in1 = io.IO(IN1)
         self.in2 = io.IO(IN2)
@@ -11,6 +11,7 @@ class Motor:
         self.in2.setDirection("out")
         
         self.pwmChannel = io.PWM(self.pwmChannelName, PWM_period, 0)
+        print('Motor PWM path: ' + self.pwmChannel.path)
     
     def setDirection(self, direction):
         self.direction = direction

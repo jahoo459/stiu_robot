@@ -19,17 +19,19 @@ def initPWMchannels():
         npwm = int(open('{}/npwm'.format(chip)).read())
         if npwm == 2:
             for i in [0, 1]:
-                path = '/sys/class/pwm/{}/'.format(chip)
-                if(os.path.isfile(path + 'pwm0/period')):
+                path = '/sys/class/pwm/{}'.format(chip)
+                if(os.path.exists(path + '/pwm0')):
                     pwm_dict[pwms[nbpwm+i]] = '{}/pwm{}/'.format(path, i)
+                    print(pwms[nbpwm+i] +' = {}/pwm{}/'.format(path, i))
                 
                 else:
                     f = open(path + 'export', 'w')
                     f.write(str(i))
                     f.close()
                     pwm_dict[pwms[nbpwm+i]] = '{}/pwm{}/'.format(path, i)
+                    print(pwms[nbpwm+i] +' = {}/pwm{}/'.format(path, i))
             
-        nbpwm += 2    
+            nbpwm += 2    
  
  
 class PWM:
