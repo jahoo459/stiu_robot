@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<robot xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+	 xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+	 xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+	 xmlns:xacro="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+	 name="stiu">
+
+	<xacro:property name="width" value=".2" />
+	<xacro:property name="leglen" value=".6" />
+	<xacro:property name="polelen" value=".2" />
+	<xacro:property name="bodylen" value=".6" />
+	<xacro:property name="baselen" value=".4" />
+	<xacro:property name="wheeldiam" value=".065" />
+	<xacro:property name="pi" value="3.1415" />
+
+	<xacro:macro name="default_inertial" params="mass">
+		<inertial>
+      			<mass value="${mass}" />
+		        <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+			         iyy="1.0" iyz="0.0"
+			         izz="1.0" />
+		</inertial>
+	</xacro:macro>
+
+	<link name="base_link">
+		<visual>
+			<geometry>
+				<box size = "0.11 0.174 0.06"/>
+			</geometry>
+			<material name="blue">
+				<color rgba="0 0 .8 1"/>
+			</material>
+		</visual>
+		<collision>
+			<geometry>
+				<box size = "0.11 0.174 0.06"/>
+			</geometry>
+		</collision>
+
+		<xacro:default_inertial mass="10"/>
+	</link>
+	
+	<xacro:macro name="wheel" params="prefix reflect">
+		<link name="${prefix}_wheel">
+			<visual>
+				<geometry>
+					<cylinder radius="${wheeldiam/2}" length=".03"/>
+				</geometry>
+				<material name="black">
+					<color rgba="0 0 0 1"/>
+				</material>
+			</visual>
+			<collision>
+				<geometry>
+					<cylinder radius="${wheeldiam/2}" length=".03"/>
+				</geometry>
+			</collision>	
+			<xacro:default_inertial mass="1"/>
+		</link>
+		<joint name="${prefix}_wheel_joint" type="continuous">
+			<axis rpy="0 0 0" xyz="0 0 1"/>
+			<parent link="base_link"/>
+			<child link="${prefix}_wheel"/>
+			<origin xyz="${0.05*reflect} 0 -0.03" rpy="0 ${pi/2} 0"/>
+      			<limit effort="100" velocity="100" />
+			<joint_properties damping="0.0" friction="0.0" />
+
+		</joint>
+	</xacro:macro>
+	<xacro:wheel prefix="right" reflect="1" />
+	<xacro:wheel prefix="left" reflect="-1" />
+
+</robot>
+
