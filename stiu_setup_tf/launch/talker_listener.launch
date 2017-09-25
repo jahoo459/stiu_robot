@@ -1,0 +1,7 @@
+<launch>
+
+	<node name = "talker" pkg = "stiu_setup_tf" type = "talker.py" output = "screen" />
+	<node name = "listener" pkg = "stiu_setup_tf" type = "listener.py" output = "screen"  />
+	
+</launch>
+

@@ -1,0 +1,30 @@
+<launch>
+
+  <arg name="model" default="$(find stiu_setup_tf)/urdf/stiu.xacro"/>
+  <arg name="rvizconfig" default="$(find stiu_setup_tf)/rviz/urdf.rviz" />  
+
+  <include file="$(find stiu_setup_tf)/launch/gazebo.launch">
+    <arg name="model" value="$(arg model)" />
+  </include>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+
+  <!-- This param file is where any environment-agnostic (live or simulation)
+  configuration should be loaded, including controllers -->
+ <rosparam command="load" file="$(find stiu_setup_tf)/config/control.yaml" />
+
+  <!-- This node loads the two controllers into a controller manager (real or simulated). The
+  controllers are defined in config/control.yaml -->
+  <node name="stiu_controller_spawner" pkg="controller_manager" type="spawner"
+    args="stiu_joint_state_controller
+          stiu_diff_drive_controller
+          --shutdown-timeout 3"/>
+
+  <node name="rqt_robot_steering" pkg="rqt_robot_steering" type="rqt_robot_steering">
+    <param name="default_topic" value="/stiu_diff_drive_controller/cmd_vel"/>
+  </node>
+
+  
+
+
+</launch>

@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
     const double degree = M_PI/180;
 
     // robot state
-    double angle1=0, angle2=0, angle=0;
+    double right_wheel_joint=0, left_wheel_joint=0, angle=M_PI, r = 2;
 
     // message declarations
     geometry_msgs::TransformStamped odom_trans;
@@ -26,29 +26,28 @@ int main(int argc, char** argv) {
         joint_state.header.stamp = ros::Time::now();
         joint_state.name.resize(2);
         joint_state.position.resize(2);
-        joint_state.name[0] ="right_wheel_to_base";
-        joint_state.position[0] = angle1;
-        joint_state.name[1] ="left_wheel_to_base";
-        joint_state.position[1] = angle2;
+        joint_state.name[0] ="right_wheel_joint";
+        joint_state.position[0] = right_wheel_joint;
+        joint_state.name[1] ="left_wheel_joint";
+        joint_state.position[1] = left_wheel_joint;
 
 
         // update transform
         // (moving in a circle with radius=2)
-        //odom_trans.header.stamp = ros::Time::now();
-        //odom_trans.transform.translation.x = cos(angle)*2;
-        //odom_trans.transform.translation.y = sin(angle)*2;
-        //odom_trans.transform.translation.z = .7;
-        //odom_trans.transform.rotation = tf::createQuaternionMsgFromYaw(angle+M_PI/2);
+        odom_trans.header.stamp = ros::Time::now();
+        odom_trans.transform.translation.x = -r*cos(angle);
+        odom_trans.transform.translation.y = -r*sin(angle);
+        odom_trans.transform.translation.z = 0;
+        odom_trans.transform.rotation = tf::createQuaternionMsgFromYaw(angle+M_PI/2);
 
         //send the joint state and transform
         joint_pub.publish(joint_state);
         broadcaster.sendTransform(odom_trans);
 
         // Create new robot state
-
         angle += degree/4;
-	angle1 += degree/4;
-	angle2 += degree/4;  
+	//right_wheel_joint += angle;
+	//left_wheel_joint += r*angle+M_PI/2;  
 
         // This will adjust as needed per iteration
         loop_rate.sleep();

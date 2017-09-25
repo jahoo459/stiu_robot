@@ -25,7 +25,7 @@
 	<link name="base_link">
 		<visual>
 			<geometry>
-				<box size = "0.11 0.174 0.06"/>
+				<box size = "0.174 0.11 0.06"/>
 			</geometry>
 			<material name="blue">
 				<color rgba="0 0 .8 1"/>
@@ -33,7 +33,7 @@
 		</visual>
 		<collision>
 			<geometry>
-				<box size = "0.11 0.174 0.06"/>
+				<box size = "0.174 0.11 0.06"/>
 			</geometry>
 		</collision>
 
@@ -61,11 +61,38 @@
 			<axis rpy="0 0 0" xyz="0 0 1"/>
 			<parent link="base_link"/>
 			<child link="${prefix}_wheel"/>
-			<origin xyz="${0.05*reflect} 0 -0.03" rpy="0 ${pi/2} 0"/>
+			<origin xyz="0 ${0.05*reflect} -0.03" rpy="${pi/2} 0 0"/>
       			<limit effort="100" velocity="100" />
 			<joint_properties damping="0.0" friction="0.0" />
 
 		</joint>
+
+		<gazebo reference="${prefix}_wheel">
+			<mu1 value="200.0"/>
+			<mu2 value="100.0"/>
+			<kp value="10000000.0"/>
+			<kd value="1.0"/>
+			<material>Gazebo/Grey</material>
+		</gazebo>
+
+		<gazebo>  
+			<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+  			</plugin>
+		</gazebo>
+ 
+		<!-- This block connects the wheel joint to an actuator (motor), which informs both
+    		simulation and visualization of the robot -->
+    
+		<!-- <transmission name="${prefix}_wheel_trans" type="SimpleTransmission">
+      			<type>transmission_interface/SimpleTransmission</type>
+      			<actuator name="${prefix}_wheel_motor">
+        			<mechanicalReduction>1</mechanicalReduction>
+      			</actuator>
+      	
+			<joint name="${prefix}_wheel_joint">
+        			<hardwareInterface>VelocityJointInterface</hardwareInterface>
+      			</joint>
+		</transmission>-->
 	</xacro:macro>
 	<xacro:wheel prefix="right" reflect="1" />
 	<xacro:wheel prefix="left" reflect="-1" />

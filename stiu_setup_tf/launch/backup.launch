@@ -1,0 +1,33 @@
+  <!-- This node loads the two controllers into a controller manager (real or simulated). The
+  controllers are defined in config/control.yaml -->
+  <node name="stiu_controller_spawner" pkg="controller_manager" type="spawner"
+    args="stiu_joint_state_controller
+          stiu_diff_drive_controller
+          --shutdown-timeout 3"/> 
+
+
+
+
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" 
+	args="stiu_diff_state_controller /> 
+  
+  <node name="rqt_robot_steering" pkg="rqt_robot_steering" type="rqt_robot_steering">
+	<param name="default_topic" value="/stiu_diff_drive_controller/cmd_vel"/>
+  </node>
+
+
+
+
+
+<!-- pages:
+https://github.com/ros/urdf_tutorial/pulls
+
+https://github.com/clearpathrobotics/urdf_tutorial/blob/7e93d633ca739bc4e59c708b8c4fecf007851395/launch/control.launch
+
+http://wiki.ros.org/urdf/Tutorials/Using%20a%20URDF%20in%20Gazebo
+
+http://wiki.ros.org/urdf/Tutorials/Using%20urdf%20with%20robot_state_publisher
+
+http://wiki.ros.org/navigation/Tutorials/RobotSetup/Sensors
+
+http://wiki.ros.org/navigation/Tutorials/RobotSetup/Odom -->

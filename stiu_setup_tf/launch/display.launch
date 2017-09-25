@@ -12,5 +12,4 @@
   <node name="state_publisher" pkg="stiu_setup_tf" type="state_publisher" />
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
 
-
 </launch>
