@@ -3,8 +3,14 @@
 #include <sensor_msgs/JointState.h>
 #include <tf/transform_broadcaster.h>
 
-int main(int argc, char** argv) {
-    ros::init(argc, argv, "state_publisher");
+
+// to implement odometry
+// having V and omega
+// http://wiki.ros.org/navigation/Tutorials/RobotSetup/Odom
+
+
+int main(int argc, char** argvs) {
+    ros::init(argc, argvs, "state_publisher");
     ros::NodeHandle n;
     ros::Publisher joint_pub = n.advertise<sensor_msgs::JointState>("joint_states", 1);
     tf::TransformBroadcaster broadcaster;
