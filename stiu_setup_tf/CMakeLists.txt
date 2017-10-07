@@ -16,9 +16,10 @@ find_package(catkin REQUIRED COMPONENTS
   tf
   diff_drive_controller
   controller_interface
-   nav_msgs
+  nav_msgs
   realtime_tools
   urdf
+  movement_control
 )
 
 
@@ -59,6 +60,7 @@ find_package(catkin REQUIRED COMPONENTS
 add_message_files(
    FILES
    Pose.msg
+   Omegas.msg
 #   Message2.msg
 )
 
@@ -116,7 +118,7 @@ catkin_package(
 INCLUDE_DIRS include
 LIBRARIES stiu_setup_tf
 LIBRARIES diff_drive_robot
-#  CATKIN_DEPENDS geometry_msgs roscpp rospy tf message_runtime
+CATKIN_DEPENDS message_runtime movement_control
 #  DEPENDS system_lib
 )
 
@@ -158,7 +160,7 @@ add_executable(tf_listener src/tf_listener.cpp)
 ## Add cmake target dependencies of the executable
 #roslaunch_add_file_check(launch)
 ## same as for the library above
-# add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(${${movement_control}src/CalcVel_server.py} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(state_publisher

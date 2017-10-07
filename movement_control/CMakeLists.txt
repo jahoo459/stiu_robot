@@ -51,6 +51,7 @@ find_package(catkin REQUIRED COMPONENTS
 add_message_files(
   FILES
   WheelData.msg
+  Omegas.msg
 #   Message2.msg
 )
 

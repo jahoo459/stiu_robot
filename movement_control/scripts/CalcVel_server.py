@@ -3,7 +3,7 @@
 import rospy
 
 from movement_control.srv import *
-from std_msgs.msg import Float64
+from movement_control.msg import *
 
 global r
 global dist_wheels
@@ -15,12 +15,12 @@ dist_wheels = 0.08
 # work as client: send data to the PID_velocity
 def Send_VelData_client(vel_l, vel_r):
     print "Ready to send data (%s, %s,) to the PID" %(vel_l, vel_r)
+    pub_omegas.publish(vel_l, vel_r)
     rospy.wait_for_service('GetVel_service')
     try:
         GetVel_service = rospy.ServiceProxy('GetVel_service', PassVel)
         info = GetVel_service(vel_l, vel_r)
-	print(info)
-        return info
+        return (info.vel_l, info.vel_r)
     except rospy.ServiceException, e:
         print "Service call failed: %s"%e
 
@@ -34,6 +34,7 @@ def handle_CalcVel(req):
 
 if __name__ == "__main__":
     rospy.init_node('CalcVel_server')
+    pub_omegas = rospy.Publisher('omegas',Omegas, queue_size=10)
     rospy.Service('CalcVel_service', CalcVel, handle_CalcVel)
     print "Ready to calculate velocities"
 

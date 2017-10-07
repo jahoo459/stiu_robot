@@ -2,4 +2,5 @@ float64 omega_l
 float64 omega_r
 
 ---
-string info
+float64 vel_l
+float64 vel_r
