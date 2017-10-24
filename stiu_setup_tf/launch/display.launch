@@ -1,5 +1,7 @@
 <launch>
 
+  <include file="$(find rplidar_ros)/launch/rplidar.launch" />
+
   <arg name="model" default="$(find stiu_setup_tf)/urdf/stiu.xacro"/>  
   <arg name="gui" default="true" />
   <arg name="rvizconfig" default="$(find stiu_setup_tf)/rviz/urdf.rviz" />

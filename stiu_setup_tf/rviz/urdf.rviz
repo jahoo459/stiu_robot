@@ -74,10 +74,40 @@ Visualization Manager:
         {}
       Update Interval: 0
       Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 0
+        Min Value: 0
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/LaserScan
+      Color: 255; 255; 255
+      Color Transformer: AxisColor
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: RPLidarLaserScan
+      Position Transformer: XYZ
+      Queue Size: 1000
+      Selectable: true
+      Size (Pixels): 5
+      Size (m): 0.03
+      Style: Squares
+      Topic: /scan
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: /base_link
+    Fixed Frame: /odom
+    Frame Rate: 30
   Name: root
   Tools:
     - Class: rviz/Interact
@@ -97,17 +127,17 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 10
+      Distance: 11.1184
       Focal Point:
-        X: 0
-        Y: 0
-        Z: 0
+        X: -0.0344972
+        Y: 0.065886
+        Z: 0.148092
       Name: Current View
       Near Clip Distance: 0.01
       Pitch: 0.465398
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.885398
+      Yaw: 5.82358
     Saved: ~
 Window Geometry:
   Displays:

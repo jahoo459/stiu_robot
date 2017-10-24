@@ -7,6 +7,8 @@
 
 double r_wheel_vel = 0;
 double l_wheel_vel = 0;
+int counter = 0;
+int prev_counter = 0;
 
 ros::Publisher *joint_pub;
 
@@ -16,6 +18,7 @@ void callback(const movement_control::Omegas& msg)
     r_wheel_vel = msg.omega_l;    
     std::cout << "left_wheel_vel: "<< msg.omega_l <<", right_wheel_vel: "<< msg.omega_r << std::endl;
     std::cout <<"Data: "<< r_wheel_vel << ", "<< l_wheel_vel << " \n"<<std::endl;
+    counter += 1;
 }
 
 int main(int argc, char** argvs) 
@@ -27,6 +30,7 @@ int main(int argc, char** argvs)
     
     // robot state
     double right_wheel_joint=0, left_wheel_joint=0, angle = 0, dist_r = 0, dist_l = 0, dr = 0, da = 0;
+    double pos_x = 0, pos_y = 0, prev_pos_x = 0, prev_pos_y = 0;
     const double degree = M_PI/180;
     double r = 0.0325;
     double wheel_sep = 0.05;
@@ -51,6 +55,15 @@ int main(int argc, char** argvs)
 	ros::spinOnce();
 
 	current_time = ros::Time::now();
+	
+	if (prev_counter != counter)
+	{
+	    last_time = current_time;
+	    prev_counter = counter;
+	    prev_pos_x = pos_x;
+	    prev_pos_y = pos_y;
+	}
+
 	double dt = (current_time - last_time).toSec();
 
 	geometry_msgs::TransformStamped odom_trans;
@@ -82,14 +95,16 @@ int main(int argc, char** argvs)
 	{
 	    angle = da;
 	}
-
+	
+	pos_x = prev_pos_x -dr * cos(da);
+	pos_y = prev_pos_y -dr * sin(da);
 
 	// update transform
-        odom_trans.transform.translation.x = -dr * cos(da);
-        odom_trans.transform.translation.y = -dr * sin(da);
+        odom_trans.transform.translation.x = pos_x;
+        odom_trans.transform.translation.y = pos_y;
         odom_trans.transform.translation.z = 0.0;
         odom_trans.transform.rotation = tf::createQuaternionMsgFromYaw(angle);
-
+	
 
         //send the joint state and transform
         joint_pub->publish(joint_state);
@@ -97,6 +112,9 @@ int main(int argc, char** argvs)
       
         right_wheel_joint = dist_l/(2*M_PI*r)*360;
 	left_wheel_joint = dist_r/(2*M_PI*r)*360;
+
+	//prev_pos_x = pos_x;
+	//prev_pos_y = pos_y;
 
 	loop_rate.sleep();
 }

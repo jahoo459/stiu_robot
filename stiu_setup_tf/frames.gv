@@ -1,0 +1,10 @@
+digraph G {
+"base_link" -> "rplidar_frame"[label="Broadcaster: /robot_state_publisher\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 1508232062.346 sec old)\nBuffer length: 0.000 sec\n"];
+"odom" -> "base_link"[label="Broadcaster: /state_publisher\nAverage rate: 1.250 Hz\nMost recent transform: 1508232061.561 ( 0.785 sec old)\nBuffer length: 4.000 sec\n"];
+"base_link" -> "left_wheel"[label="Broadcaster: /robot_state_publisher\nAverage rate: 10.210 Hz\nMost recent transform: 1508232062.276 ( 0.070 sec old)\nBuffer length: 4.799 sec\n"];
+"base_link" -> "right_wheel"[label="Broadcaster: /robot_state_publisher\nAverage rate: 10.210 Hz\nMost recent transform: 1508232062.276 ( 0.070 sec old)\nBuffer length: 4.799 sec\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1508232062.346"[ shape=plaintext ] ;
+ }->"odom";
+}

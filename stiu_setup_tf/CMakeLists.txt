@@ -20,6 +20,8 @@ find_package(catkin REQUIRED COMPONENTS
   realtime_tools
   urdf
   movement_control
+  hector_sensors_description
+  rplidar_ros
 )
 
 
@@ -61,6 +63,7 @@ add_message_files(
    FILES
    Pose.msg
    Omegas.msg
+   MotorCmd.msg
 #   Message2.msg
 )
 
@@ -118,7 +121,7 @@ catkin_package(
 INCLUDE_DIRS include
 LIBRARIES stiu_setup_tf
 LIBRARIES diff_drive_robot
-CATKIN_DEPENDS message_runtime movement_control
+CATKIN_DEPENDS message_runtime movement_control hector_sensors_description rplidar_ros
 #  DEPENDS system_lib
 )
 
