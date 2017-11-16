@@ -22,6 +22,7 @@ find_package(catkin REQUIRED COMPONENTS
   movement_control
   hector_sensors_description
   rplidar_ros
+  sensor_msgs
 )
 
 
